@@ -1,3 +1,5 @@
+--formatter.lua
+--a tool I wrote for debugging purposes
 local Formatter = {
     init = false,
     tag = nil,
