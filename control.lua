@@ -1,9 +1,8 @@
 items = {}
 sorted_items = {}
 
-SHOW_POSITIVES = settings.global["shortgrapher-show-gains"]
 
-require("mod-gui")
+
 require("gui")
 --TODO not adding items correctly
 SUPPORTED_TYPES = {
@@ -28,7 +27,6 @@ script.on_nth_tick(settings.global["shortgrapher-update-tick"].value, function (
 end);
 script.on_event(defines.events.on_player_created, function (event)
 
-    local player = game.get_player(event.player_index)
     create_gui()
 
 end)

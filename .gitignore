@@ -1,2 +1,4 @@
 run.ps1
 /.vscode
+*.zip
+publish.sh

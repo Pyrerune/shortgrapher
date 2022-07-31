@@ -4,6 +4,6 @@
     "title": "Item Shortage Graph",
     "author": "Pyrerune",
     "factorio_version": "1.1",
-    "dependencies": ["base >= 1.1", "stdlib"],
+    "dependencies": ["base >= 1.1"],
     "description": "This mod graphs what items you don't have enough of"
 }

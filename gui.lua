@@ -9,14 +9,14 @@ graph = function (event)
 end
 
 update_gui = function()
-
+    local setting = settings.global["shortgrapher-show-gains"].value
     for player in iter(global.players) do
         
         local flow = player.gui.children[1];
         flow.clear();
 
         for item in iter(sorted_items) do
-            if not SHOW_POSITIVES and item.count < 0 then
+            if not setting and item.count < 0 then
                 local button = flow.add{type="button", }
                 local content = button.add{type="table", column_count=2}
                 button.style.width = 230
@@ -24,7 +24,7 @@ update_gui = function()
                 
                 content.add{type="sprite-button", sprite=(item.type.."/"..item.name), tooltip=({item.type.."-name".."."..item.name})}
                 content.add{type="label", caption=(item.count.." items")}
-            elseif SHOW_POSITIVES then
+            elseif setting then
                 local button = flow.add{type="button", }
                 local content = button.add{type="table", column_count=2}
                 button.style.width = 230
@@ -39,7 +39,7 @@ update_gui = function()
 end
 
 create_gui = function ()
-
+    count_items()
     for player in iter(game.players) do
         local frame = player.gui.screen.add{type="frame", name=("shortgrapher-graph-frame"..player.index), caption={"shortgrapher.graph-title"}, visible=false};
         local flow = frame.add{type="scroll-pane", name="shortgrapher-graph-scroll"}
