@@ -13,6 +13,7 @@ count_items = function ()
     local entities = game.surfaces["nauvis"].find_entities_filtered{type = SUPPORTED_TYPES}
     
     for entity in iter(entities) do
+        
         if entity.type == "furnace" and entity.status == defines.entity_status.working then
             local inventory = entity.get_output_inventory()
             local dict = inventory.get_contents()
@@ -30,20 +31,22 @@ count_items = function ()
         elseif entity.type == "mining-drill" and entity.status == defines.entity_status.working then
             local speed = entity.prototype.mining_speed
             local target = entity.mining_target
-            local name = target.name
-            local category = target.prototype.resource_category
-            local type = (category == "basic-solid" and "item" or "fluid")
-            local time = target.prototype.mineable_properties.mining_time
-            local items_tick = speed / (time / 60) --should be items per game tick (resources / time (in seconds) / ticks per second)
-            if items[name] == nil then
-                items[name] = {
-                    name = name,
-                    type = type,
-                    count = items_tick
-                }
-            else
-                items[name].count = items[name].count + items_tick
+            if target ~= nil then
+                local name = target.name
+                local category = target.prototype.resource_category
+                local type = (category == "basic-solid" and "item" or "fluid")
+                local time = target.prototype.mineable_properties.mining_time
+                local items_tick = speed / (time / 60) --should be items per game tick (resources / time (in seconds) / ticks per second)
+                if items[name] == nil then
+                    items[name] = {
+                        name = name,
+                        type = type,
+                        count = items_tick
+                    }
+                else
+                    items[name].count = items[name].count + items_tick
 
+                end
             end
         elseif entity.status == defines.entity_status.working then
             
